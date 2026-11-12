@@ -1,6 +1,6 @@
 # DSH 自制插件合集
 
-面向 DeepSeek Harness 的教学、阅卷与绘图插件。一个仓库维护，六个插件分别安装；无需全部启用。
+面向 DeepSeek Harness 的教学、阅卷与绘图插件。一个仓库维护，五个插件分别安装；无需全部启用。
 
 | 插件 | 功能 | 使用前提 |
 | --- | --- | --- |
@@ -9,7 +9,6 @@
 | [授课进度](plugins/dsh-lesson-tracker) | 按课表记录课程进度、读取 PPT 页码 | 配置个人课表；PPT 自动探测需 Windows + WPS/PowerPoint |
 | [三视图工作台](plugins/dsh-sanview-studio) | 二维绘图、尺寸标注、SVG/DXF 与模型三视图 | 绘图应用已内置，无需另行部署 |
 | [小题成绩分析](plugins/dsh-score-analysis) | 导入成绩，输出班级与学科分析文件 | Python 3.10+、pandas、openpyxl；PDF 另需 reportlab |
-| [WorkBuddy 签到面板](plugins/dsh-wb-signin) | 日志摘要、计划任务、手动触发和账号入口 | 外部 WorkBuddy-Daily 脚本；Windows 功能需 Windows |
 
 ## 安装：推荐使用 Release 安装包
 
@@ -57,7 +56,7 @@ npm run pack
 
 在已安装 pandas 和 openpyxl 的 Python 环境下，可额外执行 `python scripts/smoke-score-analysis.py`，用完全合成的成绩表验证 Excel 输入到分析工作簿的实际流程；不生成 PDF。
 
-创建 `v*` 标签并推送后，[发布工作流](.github/workflows/release.yml) 会校验、打包并在 GitHub Release 附上六个安装包。包内有第三方代码时需保留对应许可证；[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 记录随包资源说明。
+创建 `v*` 标签并推送后，[发布工作流](.github/workflows/release.yml) 会校验、打包并在 GitHub Release 附上五个安装包。包内有第三方代码时需保留对应许可证；[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 记录随包资源说明。
 
 ## 许可
 

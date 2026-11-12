@@ -12,7 +12,10 @@ root = Path(__file__).resolve().parent.parent
 release = root / 'release'
 manifest = json.loads((release / 'manifest.json').read_text(encoding='utf-8'))
 node = os.environ.get('NODE_EXECUTABLE', 'node')
-assert len(manifest) == 6
+expected = {p.name for p in (root / 'plugins').iterdir() if p.is_dir()}
+assert {item['plugin'] for item in manifest} == expected
+assert len(manifest) == len(expected)
+assert 'dsh-wb-signin' not in expected
 with tempfile.TemporaryDirectory(prefix='dsh-plugin-packages-') as temp:
     for item in manifest:
         archive = release / item['file']
@@ -40,4 +43,4 @@ with tempfile.TemporaryDirectory(prefix='dsh-plugin-packages-') as temp:
             assert (package / 'embed/index.html').is_file()
         subprocess.run([node, '--input-type=module', '-e', 'const m=await import(process.argv[1]); if(typeof m.apply!=="function") process.exit(1)', (package / pkg['exports']['.']).as_uri()], check=True)
         print('Verified', item['file'], flush=True)
-print('PASS: six extracted tarballs, digests, manifests, licenses and standalone host imports')
+print('PASS: all extracted tarballs, digests, manifests, licenses and standalone host imports')

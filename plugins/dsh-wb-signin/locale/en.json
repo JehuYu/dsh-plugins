@@ -1,9 +1,0 @@
-{
-  "meta": {
-    "title": "WB Sign-in · WorkBuddy Daily",
-    "description": "WorkBuddy CN daily check-in panel: today's status, streak, credits, growth progress, scheduled-task next run, and one-tap run now."
-  },
-  "panel": {
-    "title": "WB Sign-in"
-  }
-}
