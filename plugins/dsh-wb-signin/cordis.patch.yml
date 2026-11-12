@@ -1,0 +1,16 @@
+# dsh-wb-signin bundle patch
+#
+# 一行 Host 插件：读 WorkBuddy-Daily 的 signin.log 与脱敏令牌库、
+# 查 Windows 计划任务状态，并把「立即签到」转发给 run-signin.cmd。
+# Client 半端由 package.json 的 dsh.client 声明，随本行一起装载。
+- insert:
+    - id: wb-signin
+      name: '@local/dsh-wb-signin'
+      config:
+        # 默认使用 WORKBUDDY_DAILY_ROOT 或用户主目录下的 WorkBuddy-Daily。
+        # 如需指定目录，在当前 DSH profile 的覆盖配置中设置 root。
+        # Windows 计划任务名
+        mainTask: WorkBuddyDailySignin
+        pollTask: WorkBuddyGrowthPoll
+        # 立即签到的命令（run-signin.cmd 用 pythonw，无窗口）
+        runCommand: ''

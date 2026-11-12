@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "title": "Score analysis",
+    "description": "Upload raw per-question score sheets to produce class averages, info/general item analysis, teaching-class details and report card PDFs, and keep each exam as a reopenable project."
+  },
+  "panel": {
+    "title": "Score analysis"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "title": "Lesson Tracker",
+    "description": "Detects the lesson in session from the school timetable, reads the slide index of the presentation open in WPS/PowerPoint, and records the ending page into your teaching log."
+  },
+  "panel": {
+    "title": "Lesson Tracker"
+  }
+}

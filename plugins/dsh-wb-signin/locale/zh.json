@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "title": "WB 签到 · WorkBuddy Sign-in",
+    "description": "WorkBuddy 国内版每日签到面板：今日签到状态、连签天数、积分、成长进度、计划任务下次运行时间，以及一键立即签到。"
+  },
+  "panel": {
+    "title": "WB 签到"
+  }
+}

@@ -1,0 +1,222 @@
+/* ==========================================================================
+   Newsprint 设计系统 · 主题层
+   加载顺序：style.css（结构与交互）→ newsprint.css（外观）。
+   原则：零圆角、无柔和阴影与模糊、墨黑结构线、单一红色强调（只用于提醒与选中）。
+   ========================================================================== */
+
+/* 字体：Google Fonts 拉丁子集，本地打包，离线可用（中文回退到系统字体） */
+
+
+
+
+:root{
+  --paper:#f9f9f7;          /* Newsprint 纸白 */
+  --ink:#111111;            /* 墨黑：文字与结构线 */
+  --ink-2:#404040;
+  --muted:#737373;          /* 元信息、说明 */
+  --rule:#e5e5e0;           /* 分隔细线 */
+  --hover:#f5f5f5;
+  --accent:#cc0000;         /* 编辑红：仅用于提醒与选中 */
+  --serif:'Playfair Display','Times New Roman',serif;
+  --sans:'Inter','Helvetica Neue','Microsoft YaHei',sans-serif;
+  --mono:'JetBrains Mono','Courier New',monospace;
+  --font:var(--sans);
+  --bg:var(--paper);
+  --border:var(--rule);
+  --accent-soft:var(--ink);
+}
+
+/* 零圆角：规范要求每个元素都是直角矩形 */
+*,*::before,*::after{border-radius:0!important}
+::selection{background:var(--ink);color:var(--paper)}
+
+body{
+  font-family:var(--sans);font-size:13px;color:var(--ink);
+  background-color:var(--paper);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23111111' fill-opacity='0.05' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+}
+button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+/* ---- 顶栏：报头式，粗底线作为版面分隔 ---- */
+.workspace{height:calc(100dvh - 102px)}
+.app-header{height:60px;background:var(--paper);border-bottom:4px solid var(--ink);box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.brand{font-family:var(--serif);font-weight:900;font-size:19px;letter-spacing:.02em;color:var(--ink)}
+.brand svg{color:var(--ink);width:24px;height:24px;stroke-width:1.6}
+.divider{background:var(--ink);width:1px;height:20px}
+#project-title{width:260px;max-width:26vw;font-family:var(--serif);font-style:italic;font-size:15px;font-weight:400;color:var(--ink-2);background:transparent;border:0;border-bottom:1px solid transparent;padding:4px 2px}
+#project-title:hover{border-bottom-color:var(--muted);background:transparent}
+#project-title:focus{background:transparent;border-bottom:2px solid var(--ink);box-shadow:none}
+.save-indicator{width:6px;height:6px;background:var(--ink)}
+.icon-btn{width:36px;height:36px;color:var(--ink);border:1px solid transparent}
+.icon-btn:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* ---- 按钮：实心黑 / 描边 / 幽灵 三级，悬停整体反色 ---- */
+.btn{min-height:36px;padding:7px 14px;border:1px solid var(--ink);background:transparent;color:var(--ink);box-shadow:none;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transition:background-color .2s ease-out,color .2s ease-out}
+.btn:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn svg{width:14px;height:14px}
+.btn.quiet{border-color:transparent;background:transparent;color:var(--ink)}
+.btn.quiet:hover{background:var(--rule);color:var(--ink)}
+.btn.primary{background:var(--ink);border-color:var(--ink);color:var(--paper);box-shadow:none}
+.btn.primary:hover{background:#ffffff;color:var(--ink);border-color:var(--ink)}
+.btn:disabled,button:disabled{opacity:.35}
+
+/* ---- 左侧工具栏：细线分组，选中态墨黑反白，并配红色竖线指示 ---- */
+.tool-rail{background:var(--paper);border-right:1px solid var(--ink);padding:14px 10px}
+.tool-group{border-bottom:1px solid var(--rule);gap:6px;padding-bottom:12px}
+.tool{position:relative;width:44px;height:44px;color:var(--ink);border:1px solid transparent;transition:background-color .15s ease-out,color .15s ease-out}
+.tool:hover{background:var(--rule);color:var(--ink)}
+.tool.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tool.active::before{content:'';position:absolute;left:-11px;top:-1px;bottom:-1px;width:3px;background:var(--accent)}
+.tool-rail .tool{width:44px;height:44px}
+.tool-rail .tool svg{width:20px;height:20px;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter}
+
+/* ---- 画布：纸底 + 点阵底纹，纸面用硬投影做“剪报”层次 ---- */
+.canvas-area{background:transparent}
+.canvas-top{height:46px;padding:0 24px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-2)}
+.canvas-top>span{white-space:nowrap}
+.canvas-separator{margin:0 8px;color:var(--muted)}
+.canvas-actions{gap:10px}
+.light-count{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--muted);text-transform:none}
+.context-btn{padding:7px 12px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;box-shadow:none;transition:background-color .2s ease-out,color .2s ease-out}
+.context-btn:hover:enabled{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.context-btn:disabled{opacity:.35}
+#inspection-btn.inspection-has-issues{color:var(--accent);border-color:var(--accent)}
+#inspection-btn.inspection-has-issues:hover:enabled{background:var(--accent);color:var(--paper);border-color:var(--accent)}
+.paper-shell{border-radius:0;background:#fff;box-shadow:0 0 0 1px var(--ink),6px 6px 0 0 var(--rule)}
+.paper-shell>svg{color:var(--ink)}
+.paper-shell svg .entity:hover{color:var(--muted)}
+.paper-shell svg .entity.selected{color:var(--accent)}
+#paper-grid path{stroke:#ececE6}
+#paper-grid-major path{stroke:#d9d9d2}
+
+.zoom-control{height:38px;padding:0;background:var(--paper);border:1px solid var(--ink);box-shadow:none;gap:0}
+.zoom-control button{height:36px;min-width:36px;padding:0 8px;color:var(--ink);font-size:16px;border-radius:0}
+.zoom-control button:hover{background:var(--ink);color:var(--paper)}
+.zoom-control #zoom-value{font:500 12px var(--mono);color:var(--ink);min-width:58px}
+.zoom-control>span{background:var(--ink);width:1px;height:auto;margin:0}
+
+/* ---- 底部状态栏：墨黑反白，形成版面底部的“报脚” ---- */
+.status-bar{height:42px;background:var(--ink);border-top:0;color:#b6b6b0;font-size:11px;padding:0 14px}
+.status-bar>div{gap:8px}
+.status-bar button{font-size:11px;letter-spacing:0;color:#e5e5e0;padding:4px 6px}
+.status-bar button:hover,.dimension-reference summary:hover{background:#2a2a2a;color:var(--paper)}
+.status-bar button.on,.status-bar #dimension-edit-toggle.on{background:var(--paper);color:var(--ink)}
+.status-bar #tool-status{font-family:var(--serif);font-style:italic;font-size:12px;color:var(--paper)}
+.status-divider{background:#525252}
+.mono,.status-bar .mono{font-family:var(--mono);font-size:10px;color:#a3a3a3}
+.status-bar .status-field input,.status-bar .status-field select{color:var(--paper);background:#111;border:1px solid #626262;font:500 11px var(--mono)}
+.status-bar .status-field input:focus,.status-bar .status-field select:focus{border-color:var(--paper);outline:1px solid var(--paper);outline-offset:1px}
+.status-bar input[type=checkbox]{accent-color:var(--paper)}
+.status-bar svg{stroke-width:1.6}
+.dimension-reference summary{font-family:var(--sans);font-size:11px;font-weight:400;font-style:normal;color:#e5e5e0}
+.dimension-reference summary:focus-visible{outline:2px solid var(--paper);outline-offset:1px}
+.reference-panel{background:var(--paper);border:1px solid var(--ink);color:var(--ink-2);box-shadow:4px 4px 0 var(--rule)}
+.reference-panel b{font-weight:600}
+
+/* ---- 弹窗：纸面 + 墨线 + 硬投影，标题如报纸大标题 ---- */
+dialog{background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:28px 30px;box-shadow:8px 8px 0 0 var(--ink)}
+dialog::backdrop{background:rgba(17,17,17,.55);backdrop-filter:none;-webkit-backdrop-filter:none}
+h2{font-family:var(--serif);font-size:26px;font-weight:900;letter-spacing:-.01em;line-height:1.1;color:var(--ink);margin:0 0 22px;padding-bottom:12px;border-bottom:4px solid var(--ink)}
+.dialog-close{top:14px;right:14px;width:34px;height:34px;border:1px solid transparent}
+.dialog-close:hover{background:var(--ink);color:var(--paper)}
+.dialog-footer{border-top:1px solid var(--rule);margin-top:26px;padding-top:18px}
+.section-title{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:14px}
+.check-row{font-size:12px;color:var(--ink-2);margin:12px 0}
+.check-row input[type=checkbox]{width:14px;height:14px;padding:0;margin:0;border:1px solid var(--ink);border-radius:0;background:var(--paper);accent-color:var(--ink);box-shadow:none}
+.form-row>label,.template-params label,.field-label,.selection-dialog .form-row>label,.selection-dialog .field-label{font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--muted)}
+.template-params .muted{font-family:var(--mono);font-size:10px;color:var(--muted)}
+
+/* 输入框：底线式，规范要求等宽数字，聚焦时灰底、无光环 */
+input,select{height:36px;padding:6px 2px;background:transparent;border:0;border-bottom:2px solid var(--ink);font-family:var(--mono);font-size:13px;color:var(--ink);box-shadow:none}
+input:hover,select:hover{background:transparent;border-color:var(--ink)}
+input:focus,select:focus{background:#f0f0f0;border-bottom-color:var(--ink);box-shadow:none;outline:none}
+input[readonly]{color:var(--muted);background:transparent}
+input[type=checkbox]{height:14px;width:14px}
+.template-params input,.selection-info input[type=number],.inspection-view select,.arc-fields input,.arc-fields select{font-family:var(--mono)}
+#project-title,.check-row input,.inspection-flips input,.inspection-reference-list input{font-family:inherit}
+
+/* 模板卡：细框 + 悬停硬投影位移，选中墨黑反白 */
+.template-cards{gap:14px}
+.template-card{background:#fff;border:1px solid var(--ink);padding:14px;transition:transform .2s ease-out,box-shadow .2s ease-out,background-color .2s ease-out,color .2s ease-out}
+.template-card:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 0 var(--ink);border-color:var(--ink)}
+.template-card>svg{stroke:var(--ink);fill:var(--paper);stroke-width:1.2}
+.template-card>b{font-family:var(--serif);font-size:14px;font-weight:700;color:var(--ink);margin-top:12px}
+.template-card.active{background:var(--ink);color:var(--paper);box-shadow:none;transform:none}
+.template-card.active>svg{stroke:var(--paper);fill:#2a2a2a}
+.template-card.active>b{color:var(--paper)}
+
+/* 导出选项：报纸目录式行，悬停整行反白 */
+.export-options>button{border:0;border-top:1px solid var(--rule);border-radius:0;padding:16px 10px;margin:0;transition:background-color .2s ease-out,color .2s ease-out}
+.export-options>button:first-child{border-top:1px solid var(--ink)}
+.export-options>button:hover{background:var(--ink);color:var(--paper)}
+.export-options>button>span:nth-child(2){font-family:var(--serif);font-size:16px;font-weight:700;color:var(--ink)}
+.export-options>button:hover>span,.export-options>button:hover>svg{color:var(--paper)}
+.export-options small{font-family:var(--sans);font-size:11px;font-weight:400;color:var(--muted)}
+.export-options>button:hover small{color:#a3a3a3}
+.export-options>button>svg{color:var(--ink)}
+.format-tag{width:46px;height:36px;border:1px solid currentColor;background:transparent;color:var(--ink);font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.04em}
+.export-options>button:hover .format-tag{border-color:var(--paper);color:var(--paper)}
+
+/* 尺寸参考、检查面板 */
+
+.inspection-totals{background:#fff;border:1px solid var(--ink);border-radius:0}
+.inspection-totals>div+div{border-left:1px solid var(--ink)}
+.inspection-totals b{font-family:var(--serif);font-size:40px;font-weight:900;color:var(--ink)}
+.inspection-totals span{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.inspection-note,.inspection-footnote{font-size:12px;color:var(--ink-2)}
+.inspection-section-title{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:6px;margin:26px 0 8px}
+.inspection-results li{border-bottom:1px solid var(--rule)}
+.inspection-results b{font-size:13px;color:var(--ink);font-weight:600}
+.inspection-results small{color:var(--muted)}
+.inspection-pending b{color:var(--accent)}
+.inspection-locate{color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:4px;font-weight:600}
+.inspection-locate:hover{color:var(--accent)}
+.inspection-dialog summary{font-family:var(--serif);font-size:16px;font-weight:700;font-style:italic;color:var(--ink)}
+.inspection-view{background:#fff;border:1px solid var(--ink)}
+.inspection-view>svg{color:var(--ink)}
+.inspection-view-title{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.inspection-flips label,.inspection-reference-list label{font-size:12px;color:var(--ink-2)}
+.inspection-reference-list small{color:var(--muted)}
+
+/* 浮层：工具弹出菜单、数字编辑器、提示 */
+.tool-options{background:#fff;border:1px solid var(--ink);box-shadow:6px 6px 0 0 var(--ink);padding:6px}
+.tool-options button{color:var(--ink);font-size:12px;border-radius:0}
+.tool-options button:hover{background:var(--hover)}
+.tool-options button.active{background:var(--ink);color:var(--paper)}
+.tool-options button.active svg{stroke:var(--paper)}
+.popover-title{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:6px 8px 8px}
+.tool-options .profile-grid,.tool-options .arc-fields{border-bottom-color:var(--rule)}
+.number-editor{background:#fff;border:1px solid var(--ink);box-shadow:4px 4px 0 0 var(--ink);padding:0}
+.number-editor input{border:0;background:transparent;font-size:16px;text-align:center;height:34px}
+.number-editor button{background:var(--ink);color:var(--paper);width:34px;height:34px}
+.number-editor button:hover{background:var(--accent)}
+.toast{background:var(--ink);color:var(--paper);border:0;box-shadow:none;font-family:var(--sans);font-size:13px;letter-spacing:.02em;padding:12px 18px}
+.pill{background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:10px;padding:2px 6px}
+.selection-empty{font-size:12px;color:var(--muted)}
+.selection-dialog{padding:14px}
+
+/* 小字号统一提升，并保证可读 */
+.tool-options .arc-mode-grid button,.tool-options .profile-grid button{font-size:12px}
+.tool-options .profile-grid button{font-size:11px}
+
+/* ---- 响应式：保持直角与墨线，只收窄版面 ---- */
+@media(max-width:1050px){
+  .workspace{height:calc(100dvh - 102px)}
+  .tool{width:40px;height:38px}
+}
+@media(max-width:700px){
+  .app-header{height:56px;background:var(--paper)}
+  .workspace{height:calc(100dvh - 98px);grid-template-columns:56px minmax(0,1fr)}
+  .tool{width:44px;height:44px}
+  .tool-group{gap:4px}
+  .icon-btn{width:40px;height:40px}
+  .btn{min-height:40px}
+  .btn.quiet{padding:6px 9px}
+  .status-bar{font-size:10px;padding:0 8px}
+  .context-btn{min-height:36px}
+  .canvas-top{padding:0 12px}
+  dialog{padding:22px}
+  h2{font-size:22px}
+}
+/* Keep all four dimension tools visible on shorter desktop screens. */
+@media(max-height:800px){.tool-rail .tool{height:38px;min-height:38px}.tool-rail .tool-group{gap:4px}}

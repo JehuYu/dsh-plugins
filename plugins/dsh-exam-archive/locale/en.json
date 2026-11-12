@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "title": "Exam archive and reminders",
+    "description": "Archives scoring standards from the DingTalk scanning group into the selected exam folder, displays collection status, and previews start or end reminders on request. Sending messages is disabled by default."
+  },
+  "panel": {
+    "title": "Exam Archive"
+  }
+}

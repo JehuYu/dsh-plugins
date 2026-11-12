@@ -1,0 +1,13 @@
+# 首次安装不自动记录；先配置作息、班级与课程，再自行启用。
+- insert:
+    - id: lesson-tracker
+      name: '@local/dsh-lesson-tracker'
+      config:
+        teacher: ''
+        subject: ''
+        autoRecord: false
+        importPath: ''
+        periods: {}
+        classes: []
+        courses: []
+        endGraceSec: 90

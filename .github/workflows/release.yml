@@ -1,0 +1,46 @@
+name: Validate and release plugins
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Validate source and standalone resources
+        run: node scripts/check.mjs
+      - name: Run archive, timetable and score offline regressions
+        run: node --test plugins/dsh-exam-archive/tests/*.test.mjs plugins/dsh-lesson-tracker/tests/*.test.mjs plugins/dsh-score-analysis/tests/*.test.mjs
+      - name: Run assisted grading offline host regressions
+        run: npm --prefix plugins/dsh-ameqp-grading test
+      - name: Install client test dependencies without install scripts
+        run: npm --prefix plugins/dsh-ameqp-grading install --ignore-scripts --package-lock=false --no-audit --no-fund
+      - name: Run assisted grading client regressions
+        run: npm --prefix plugins/dsh-ameqp-grading run test:client
+      - name: Check Python syntax without executing application code
+        run: python scripts/check-python.py
+      - name: Package all independent plugins
+        run: npm run pack
+      - name: Verify extracted installation packages
+        run: python scripts/verify-packages.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dsh-plugin-packages
+          path: release/*
+      - name: Publish tagged release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" release/*.tgz release/SHA256SUMS release/manifest.json --title "DSH 插件合集 $GITHUB_REF_NAME" --notes-file RELEASE_NOTES.md

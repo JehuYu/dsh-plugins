@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Score analysis">
+  <defs>
+    <linearGradient id="saBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4F6BED"/>
+      <stop offset="1" stop-color="#2FBFA4"/>
+    </linearGradient>
+  </defs>
+  <rect x="3" y="3" width="58" height="58" rx="15" fill="url(#saBg)"/>
+  <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6">
+    <path d="M16 50V32" opacity="0.75"/>
+    <path d="M26 50V24" opacity="0.85"/>
+    <path d="M36 50V36" opacity="0.75"/>
+    <path d="M46 50V19" opacity="0.95"/>
+  </g>
+  <path d="M14 26l10-6 10 5 10-12" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  <circle cx="44" cy="13" r="3.4" fill="#FFFFFF"/>
+</svg>

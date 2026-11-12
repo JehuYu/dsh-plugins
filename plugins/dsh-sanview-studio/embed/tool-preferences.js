@@ -1,0 +1,11 @@
+/* UI preferences are independent of drawing geometry and project history. */
+(function(root){
+'use strict';
+const key='sanview-tool-preferences-v1',defaults={style:'solid',arcMode:'center',arcSweep:180,arcDirection:'auto',profileKind:'rect',diameterStyle:'auto',radiusStyle:'auto',arcLeader:'auto',distanceStyle:'auto',filletRadius:5,chamferDistance1:5,chamferDistance2:5,offsetDistance:5,distancePickMode:'line',distanceDefaultDirection:null,distanceRepeat:'single',distanceIntersections:true,lineTool:'line',shapeTool:'rect',cornerTool:'fillet',editTool:'erase'};
+function normalize(raw={}){const out={...defaults},choices={style:['solid','thin','hidden','center'],arcMode:['center','three','endpoints','fixed'],arcDirection:['auto','cw','ccw'],profileKind:['rect','roundrect','slot','hexagon','triangle','trapezoid'],diameterStyle:['auto','inside','outside','leader','horizontal','vertical'],radiusStyle:['auto','outside','leader','inside','short','short-leader'],arcLeader:['auto','perpendicular','radial'],distanceStyle:['auto','inside','outside','leader','horizontal-text','miter'],distancePickMode:['line','points','point-line','lines','auto'],distanceDefaultDirection:[null,'horizontal','vertical','aligned'],distanceRepeat:['single','chain','baseline'],lineTool:['line','poly'],shapeTool:['rect','circle'],cornerTool:['fillet','chamfer'],editTool:['erase','split','extend','offset']};if(!raw||typeof raw!=='object')return out;
+ for(const [k,values] of Object.entries(choices))if(values.includes(raw[k]))out[k]=raw[k];for(const [k,min,max] of [['arcSweep',.1,359.9],['filletRadius',.05,200],['chamferDistance1',.05,10000],['chamferDistance2',.05,10000],['offsetDistance',.05,10000]])if(Number.isFinite(raw[k])&&raw[k]>=min&&raw[k]<=max)out[k]=raw[k];if(typeof raw.distanceIntersections==='boolean')out.distanceIntersections=raw.distanceIntersections;return out;
+}
+function load(storage){try{return normalize(JSON.parse(storage.getItem(key)));}catch{return normalize();}}
+function save(storage,value){try{storage.setItem(key,JSON.stringify(normalize(value)));return true;}catch{return false;}}
+root.ToolPreferences={normalize,load,save};if(typeof module!=='undefined'&&module.exports)module.exports=root.ToolPreferences;
+})(typeof window!=='undefined'?window:globalThis);

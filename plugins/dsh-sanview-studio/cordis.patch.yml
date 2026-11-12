@@ -1,0 +1,13 @@
+# dsh-sanview-studio bundle patch
+#
+# 一行 Host 插件：把三视图工作台的 dist/ 以只读静态资源挂到 Harness 的
+# webServer 上（默认 /sanview-studio/），并在返回 index.html 时注入主题适配层。
+# Client 半端由 package.json 的 dsh.client 声明，随本行一起装载。
+- insert:
+    - id: sanview-studio
+      name: '@local/dsh-sanview-studio'
+      config:
+        # 默认使用发布包内的 embed/，也可在个人 profile 覆盖此目录。
+        distPath: ''
+        # 访问前缀，需以 / 开头。
+        basePath: '/sanview-studio'

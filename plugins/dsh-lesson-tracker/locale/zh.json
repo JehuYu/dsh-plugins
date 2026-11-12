@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "title": "授课进度 · Lesson Tracker",
+    "description": "按作息表与个人课表自动识别当前课程，读取 WPS/PowerPoint 打开的 PPT 页码，并在下课时把结束页码写入授课进度记录。"
+  },
+  "panel": {
+    "title": "授课进度"
+  }
+}

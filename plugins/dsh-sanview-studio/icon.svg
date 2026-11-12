@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Sanview Studio">
+  <rect x="0" y="0" width="64" height="64" rx="14" fill="#f4f5f7"/>
+  <g fill="none" stroke="#2b2d33" stroke-width="2.6" stroke-linejoin="round">
+    <rect x="12" y="13" width="19" height="16" rx="2.4"/>
+    <rect x="35" y="13" width="17" height="16" rx="2.4" opacity="0.55"/>
+    <rect x="12" y="33" width="19" height="16" rx="2.4" opacity="0.55"/>
+  </g>
+  <g fill="none" stroke="#4d6bfe" stroke-width="2.6" stroke-linecap="round">
+    <path d="M35 41h17"/>
+    <path d="M35 41v-4.4M52 41v-4.4"/>
+  </g>
+</svg>

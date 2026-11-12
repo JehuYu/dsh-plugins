@@ -1,0 +1,12 @@
+{
+  "name": "jehuyu-dsh-plugins",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Independent DSH plugins for teaching, exam workflows and drawing",
+  "type": "module",
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "pack": "node scripts/pack.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

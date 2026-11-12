@@ -1,0 +1,16 @@
+# dsh-score-analysis bundle patch
+#
+# 一行 Host 插件：注册 /score-analysis/api/* 路由，负责上传、Python 小题分析、
+# 教学班映射、导出下载与考试项目存档。Client 半端由 package.json 的 dsh.client
+# 声明，随本行一起装载，在侧边栏显示「成绩分析」入口。
+#
+# 所有路径都可以在此覆盖；默认值见 index.js 的 DEFAULT_SETTINGS。
+- insert:
+    - id: score-analysis
+      name: '@local/dsh-score-analysis'
+      config:
+        # 运行小题分析的 Python（需 pandas / openpyxl；读取 .xls 需要 xlrd，
+        # 插件已内置 vendor_xlrd，无需单独安装）
+        pythonPath: ''
+        # 单次处理超时（毫秒）
+        timeoutMs: 240000

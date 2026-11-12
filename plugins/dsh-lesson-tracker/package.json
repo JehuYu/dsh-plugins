@@ -1,0 +1,48 @@
+{
+  "name": "@local/dsh-lesson-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "description": "授课进度：按用户配置的作息表与课表自动识别当前课程，读取 WPS/PowerPoint 打开的 PPT 页码并在下课时写入授课进度记录。",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "xlsx.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md"
+  ],
+  "icon": "./icon.svg",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-slots"
+      ]
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JehuYu/dsh-plugins.git",
+    "directory": "plugins/dsh-lesson-tracker"
+  },
+  "homepage": "https://github.com/JehuYu/dsh-plugins/tree/main/plugins/dsh-lesson-tracker",
+  "bugs": {
+    "url": "https://github.com/JehuYu/dsh-plugins/issues"
+  }
+}

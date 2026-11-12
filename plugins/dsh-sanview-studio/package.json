@@ -1,0 +1,50 @@
+{
+  "name": "@local/dsh-sanview-studio",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "description": "三视图工作台：在 Harness 侧栏打开「三视图」绘图与尺寸标注工作台，沿用 Harness 的主题、留白与排版。",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "embed-theme.css",
+    "embed-bridge.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "embed/**",
+    "README.md"
+  ],
+  "icon": "./icon.svg",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-slots"
+      ]
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JehuYu/dsh-plugins.git",
+    "directory": "plugins/dsh-sanview-studio"
+  },
+  "homepage": "https://github.com/JehuYu/dsh-plugins/tree/main/plugins/dsh-sanview-studio",
+  "bugs": {
+    "url": "https://github.com/JehuYu/dsh-plugins/issues"
+  }
+}
