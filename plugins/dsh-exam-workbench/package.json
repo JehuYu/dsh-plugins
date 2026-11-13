@@ -1,0 +1,18 @@
+{
+  "name": "@local/dsh-exam-workbench",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "description": "统一阅卷工作台：多账号 AI 阅卷与评分标准归档。请单独安装，勿与旧阅卷和归档插件并用。",
+  "type": "module",
+  "exports": { ".": "./index.js", "./client": "./client.js", "./locale/*.json": "./locale/*.json", "./icon": "./icon.svg" },
+  "files": ["*.js", "scripts/build-client.mjs", "cordis.patch.yml", "locale/*.json", "icon.svg", "README.md", "LICENSE"],
+  "icon": "./icon.svg",
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" }, "client": { "platform": "web", "immediately": true, "inject": ["@deepseek-ai/dsh-client-ui-slots"] } },
+  "engines": { "node": ">=20" },
+  "scripts": { "build": "node scripts/build-client.mjs", "check": "node --check index.js && node --check client.js && node --check archive-host.js && node --check archive-view.js", "test": "node --test tests/*.test.js tests/*.test.mjs" },
+  "devDependencies": { "react": "^18.3.1", "react-test-renderer": "^18.3.1" },
+  "repository": { "type": "git", "url": "git+https://github.com/JehuYu/dsh-plugins.git", "directory": "plugins/dsh-exam-workbench" },
+  "homepage": "https://github.com/JehuYu/dsh-plugins/tree/main/plugins/dsh-exam-workbench",
+  "bugs": { "url": "https://github.com/JehuYu/dsh-plugins/issues" }
+}

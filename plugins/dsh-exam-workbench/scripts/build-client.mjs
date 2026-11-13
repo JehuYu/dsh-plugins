@@ -1,0 +1,13 @@
+import fs from 'node:fs'
+const root = new URL('../', import.meta.url)
+const read = name => fs.readFileSync(new URL(name, root), 'utf8')
+let source = read('grading-client.js')
+const archive = read('archive-view.js').replace('export function ', 'function ')
+const shell = read('workbench-shell.js').replace('export function ', 'function ')
+const start = source.lastIndexOf('\n    return {\n      name: NS,')
+const end = source.lastIndexOf('\n  },\n})')
+if (start < 0 || end <= start) throw new Error('Grading client export boundary changed')
+source = source.slice(0, start) + '\n' + archive + '\n' + shell + '\n    return createUnifiedPlugin({ React, App, WorkbenchBoundary, Icon, createArchiveView })\n' + source.slice(end)
+source = source.replace("id: '@local/dsh-ameqp-grading'", "id: '@local/dsh-exam-workbench'")
+fs.writeFileSync(new URL('client.js', root), source)
+console.log('Built unified client.js')

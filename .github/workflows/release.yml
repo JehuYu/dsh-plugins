@@ -29,6 +29,10 @@ jobs:
         run: npm --prefix plugins/dsh-ameqp-grading install --ignore-scripts --package-lock=false --no-audit --no-fund
       - name: Run assisted grading client regressions
         run: npm --prefix plugins/dsh-ameqp-grading run test:client
+      - name: Install unified workbench test dependencies without install scripts
+        run: npm --prefix plugins/dsh-exam-workbench install --ignore-scripts --package-lock=false --no-audit --no-fund
+      - name: Run unified workbench offline regressions
+        run: npm --prefix plugins/dsh-exam-workbench test
       - name: Check Python syntax without executing application code
         run: python scripts/check-python.py
       - name: Package all independent plugins

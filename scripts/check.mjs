@@ -50,4 +50,4 @@ for (const match of String(html.body).matchAll(/(?:src|href)="([^"#]+\.(?:js|css
   assert.equal(response.status, 200, `Missing embedded resource ${match[1]}`)
 }
 assert.equal((await request('/sanview-studio/missing-file.js')).status, 404)
-console.log(`PASS: ${count} JavaScript sources; five host imports; embedded Sanview HTTP/resources`)
+console.log(`PASS: ${count} JavaScript sources; all host imports; embedded Sanview HTTP/resources`)

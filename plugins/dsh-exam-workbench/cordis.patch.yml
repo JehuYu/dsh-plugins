@@ -1,0 +1,20 @@
+# 填写您自己的配置；默认只读，不发送提醒。
+- insert:
+    - id: exam-workbench
+      name: '@local/dsh-exam-workbench'
+      config:
+        grading:
+          ameqpBase: 'https://example.invalid/AMEQP/'
+          examId: null
+          subjectId: null
+          productionMarking: false
+          autoMaxPapers: 200
+          maxConcurrentModels: 2
+          providerConcurrency: {}
+        archive:
+          archiveRoot: ''
+          rosterDir: ''
+          groupName: ''
+          sendReminders: false
+          dwsCommand: dws
+          pollSec: 30
