@@ -1,10 +1,12 @@
-# 统一阅卷工作台
+# 阅卷工作台
 
 DSH 插件，将多账号 AI 阅卷、评分配置、人工复核及恢复、评分标准归档与收件提醒放在同一个工作台。公开包不含真实试卷、答卷、标准、分数或样本，需自行配置题目和有权使用的材料。正式领卷、提交与取消默认关闭；提醒默认仅预演。
 
+本插件即原“统一阅卷工作台”，也是本仓库唯一的阅卷插件。旧版“阅卷归档”和“AMEQP 辅助阅卷”已从仓库移除，其数据目录和接口路由沿用不变。
+
 ## 安装和切换
 
-独立安装本包 tarball（包名 `@local/dsh-exam-workbench`，`private: true` 不妨碍 tarball 安装）。需要 Node.js 20+ 和提供 client UI slots、locale、webServer 的 DSH。**不要与 `@local/dsh-ameqp-grading` 或 `@local/dsh-exam-archive` 同时启用**：它们共用 API 路由和数据目录。切换前停止旧插件并备份 `DSH_HOME/ameqp-grading`、`DSH_HOME/exam-archive`；未设置 DSH_HOME 时位于用户主目录 `.dsh` 下。配置现在嵌套在 `grading` 和 `archive` 中，旧配置不会自动迁移；检查后再启用。
+独立安装本包 tarball（包名 `@local/dsh-exam-workbench`，`private: true` 不妨碍 tarball 安装）。需要 Node.js 20+ 和提供 client UI slots、locale、webServer 的 DSH。若此前装过旧版 `@local/dsh-ameqp-grading` 或 `@local/dsh-exam-archive`，**请先停用并卸载它们**：它们与本插件共用 API 路由和数据目录。切换前备份 `DSH_HOME/ameqp-grading`、`DSH_HOME/exam-archive`；未设置 DSH_HOME 时位于用户主目录 `.dsh` 下。配置现在嵌套在 `grading` 和 `archive` 中，旧配置不会自动迁移；检查后再启用。
 
 在插件配置的 `grading` 中填写自己的 `ameqpBase`、考试和科目 ID；默认地址为不可用占位地址，考试和科目默认未配置。`productionMarking` 仅在核对权限与后果后显式启用才允许正式领卷、写分及取消。AI 服务的密钥由用户自行提供；试验密钥不写入配置或草稿。
 

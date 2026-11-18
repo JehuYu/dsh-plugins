@@ -1852,7 +1852,7 @@ function createUnifiedPlugin({ React, App: GradingApp, WorkbenchBoundary, Icon, 
   const archive = createArchiveView(React)
   const dicts = {
     zh: { title: '阅卷工作台', grading: 'AI 阅卷', archive: '阅卷归档', navigation: '阅卷功能' },
-    en: { title: 'Exam workbench', grading: 'AI grading', archive: 'Exam archive', navigation: 'Exam tools' },
+    en: { title: 'Grading workbench', grading: 'AI grading', archive: 'Exam archive', navigation: 'Grading tools' },
   }
   const CSS = `
 .ew-shell{height:100%;min-height:0;width:100%;min-width:0;display:flex;flex-direction:column;overflow:hidden;background:var(--dsw-alias-bg-base);color:var(--dsw-alias-label-primary)}

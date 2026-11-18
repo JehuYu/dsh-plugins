@@ -1,6 +1,0 @@
-{
-  "meta": {
-    "title": "AI grading",
-    "description": "Run independent AMEQP accounts with per-task DSH vision models or custom APIs, grade and submit in parallel, and switch views without interrupting work. Includes manual grading and read-only trials; official submissions follow the marking switch."
-  }
-}

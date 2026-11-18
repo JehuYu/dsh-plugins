@@ -14,7 +14,7 @@ fs.writeFileSync = () => { writes++; throw new Error('runtime write forbidden') 
 fs.mkdirSync = () => { writes++; throw new Error('runtime directory forbidden') }
 syncBuiltinESMExports()
 const lesson = await import('../index.js')
-const exam = await import('../../dsh-exam-archive/index.js')
+const exam = await import('../../dsh-exam-workbench/archive-host.js')
 
 function mount(apply, config = {}) {
   let handler

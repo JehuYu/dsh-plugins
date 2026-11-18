@@ -6,4 +6,4 @@
 - DSH 宿主和 React 由用户现有 DSH 安装提供，本仓库不打包宿主安装文件。其他 Node 模块使用 Node 内建接口；开发测试依赖按包内说明安装。
 - pandas、openpyxl、reportlab、DWS CLI、WPS/PowerPoint 与远程阅卷平台为外部运行依赖，不随本仓库重新分发。各自名称与商标属于各自权利人。
 - xlrd 原始许可证同时涵盖 Stephen John Machin / Lingfo Pty Ltd 的条款和 David Giffin 早期实现的条款。完整条款见随包 LICENSE，并保留以下致谢：This product includes software developed by David Giffin <david@giffin.org>.
-- 原本本地阅卷插件及统一阅卷工作台包含的真实试题、参考答案、答卷图像与采样评分均不在公开分发范围内。用户应自行提供拥有使用权限的输入。
+- 原本本地阅卷插件及阅卷工作台包含的真实试题、参考答案、答卷图像与采样评分均不在公开分发范围内。用户应自行提供拥有使用权限的输入。

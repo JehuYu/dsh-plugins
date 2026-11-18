@@ -1,9 +1,9 @@
 {
   "name": "@local/dsh-exam-workbench",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "license": "MIT",
-  "description": "统一阅卷工作台：多账号 AI 阅卷与评分标准归档。请单独安装，勿与旧阅卷和归档插件并用。",
+  "description": "阅卷工作台：多账号 AI 阅卷与评分标准归档。旧版阅卷归档与 AMEQP 辅助阅卷已并入本插件。",
   "type": "module",
   "exports": { ".": "./index.js", "./client": "./client.js", "./locale/*.json": "./locale/*.json", "./icon": "./icon.svg" },
   "files": ["*.js", "scripts/build-client.mjs", "cordis.patch.yml", "locale/*.json", "icon.svg", "README.md", "LICENSE"],

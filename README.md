@@ -4,14 +4,12 @@
 
 | 插件 | 功能 | 使用前提 |
 | --- | --- | --- |
-| [统一阅卷工作台](plugins/dsh-exam-workbench) | 集成 AI 辅助阅卷与评分标准归档 | 自有阅卷平台；归档功能需要 DWS CLI |
-| [阅卷归档](plugins/dsh-exam-archive) | 从钉钉群归档评分标准，检查收件并准备提醒 | DWS CLI 登录；配置归档目录和群 |
-| [AMEQP 辅助阅卷](plugins/dsh-ameqp-grading) | 模型辅助批阅、任务调度、人工复核 | 自有阅卷平台账户、考试与模型；候选版本 |
+| [阅卷工作台](plugins/dsh-exam-workbench) | 集成 AI 辅助阅卷与评分标准归档 | 自有阅卷平台；归档功能需要 DWS CLI |
 | [授课进度](plugins/dsh-lesson-tracker) | 按课表记录课程进度、读取 PPT 页码 | 配置个人课表；PPT 自动探测需 Windows + WPS/PowerPoint |
 | [三视图工作台](plugins/dsh-sanview-studio) | 二维绘图、尺寸标注、SVG/DXF 与模型三视图 | 绘图应用已内置，无需另行部署 |
 | [小题成绩分析](plugins/dsh-score-analysis) | 导入成绩，输出班级与学科分析文件 | Python 3.10+、pandas、openpyxl；PDF 另需 reportlab |
 
-统一阅卷工作台整合了旧版 AI 阅卷和阅卷归档；它使用相同的接口路由。**请勿同时启用统一工作台与旧版“AMEQP 辅助阅卷”或“阅卷归档”**，切换前先备份个人配置和数据。
+阅卷工作台整合了原先的 AI 辅助阅卷和阅卷归档，现在只维护这一个阅卷插件；旧版“阅卷归档”和“AMEQP 辅助阅卷”已从本仓库移除，改用本插件即可，升级前请先备份个人配置和数据。
 
 ## 安装：推荐使用 Release 安装包
 

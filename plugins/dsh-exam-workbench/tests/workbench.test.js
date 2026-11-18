@@ -77,10 +77,10 @@ test('one unified main/sidebar registration and reactive localized labels', t =>
   assert.equal(f.tab('archive').children.join(''), '阅卷归档')
   assert.equal(f.ctx.dictionaries.get('exam-workbench-archive-ui:zh').title, '归档测试')
   act(() => f.ctx.locale.change('en'))
-  assert.equal(sidebar.options.label(), 'Exam workbench')
+  assert.equal(sidebar.options.label(), 'Grading workbench')
   assert.equal(f.tab('grading').children.join(''), 'AI grading')
   assert.equal(f.tab('archive').children.join(''), 'Exam archive')
-  assert.equal(f.rendered.root.findByProps({ role: 'tablist' }).props['aria-label'], 'Exam tools')
+  assert.equal(f.rendered.root.findByProps({ role: 'tablist' }).props['aria-label'], 'Grading tools')
 })
 
 test('archive loads lazily and switching tabs preserves the grading draft and both mounts', t => {

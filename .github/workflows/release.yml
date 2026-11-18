@@ -22,16 +22,10 @@ jobs:
       - name: Validate source and standalone resources
         run: node scripts/check.mjs
       - name: Run archive, timetable and score offline regressions
-        run: node --test plugins/dsh-exam-archive/tests/*.test.mjs plugins/dsh-lesson-tracker/tests/*.test.mjs plugins/dsh-score-analysis/tests/*.test.mjs
-      - name: Run assisted grading offline host regressions
-        run: npm --prefix plugins/dsh-ameqp-grading test
-      - name: Install client test dependencies without install scripts
-        run: npm --prefix plugins/dsh-ameqp-grading install --ignore-scripts --package-lock=false --no-audit --no-fund
-      - name: Run assisted grading client regressions
-        run: npm --prefix plugins/dsh-ameqp-grading run test:client
-      - name: Install unified workbench test dependencies without install scripts
+        run: node --test plugins/dsh-lesson-tracker/tests/*.test.mjs plugins/dsh-score-analysis/tests/*.test.mjs
+      - name: Install grading workbench test dependencies without install scripts
         run: npm --prefix plugins/dsh-exam-workbench install --ignore-scripts --package-lock=false --no-audit --no-fund
-      - name: Run unified workbench offline regressions
+      - name: Run grading workbench offline regressions
         run: npm --prefix plugins/dsh-exam-workbench test
       - name: Check Python syntax without executing application code
         run: python scripts/check-python.py
